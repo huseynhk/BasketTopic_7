@@ -122,7 +122,7 @@ const WishList = ({
         </div>
       ) : (
         <div className="flex justify-center items-center">
-          <h1 className="text-orange-300 text-[300px] mt-5">
+          <h1 className="text-orange-300 text-[400px] mt-12">
             <GoHeart />
           </h1>
         </div>
