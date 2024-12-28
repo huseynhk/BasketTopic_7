@@ -34,7 +34,6 @@ const Product = ({
     }
   };
 
-
   const addToBasket = (productId) => {
     const addProduct = products.find((product) => product.id === productId);
     const existProduct = basket.find((product) => product.id === productId);
@@ -84,11 +83,14 @@ const Product = ({
     const existProduct = arr.find((product) => product.id === productId);
     return existProduct;
   };
-  
+
   const filteredProduct = products?.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  const sortedProducts = useMemo(() => getSortedProducts(filteredProduct), [filteredProduct, sortOption]);
+  const sortedProducts = useMemo(
+    () => getSortedProducts(filteredProduct),
+    [filteredProduct, sortOption]
+  );
 
   useEffect(() => {
     fetchData();
@@ -102,7 +104,11 @@ const Product = ({
             <div className="animate-spin rounded-full h-32 w-32 border-t-8 mt-12 border-cyan-300 border-opacity-50"></div>
           </div>
         ) : sortedProducts.length === 0 ? (
-          <h2 className="text-green-300 text-4xl font-bold m-12">Not Found</h2>
+          <div className="flex justify-center items-center h-72">
+            <h2 className="text-sky-300 text-6xl font-bold mt-20">
+              Not Found
+            </h2>
+          </div>
         ) : (
           <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
             {sortedProducts.map((product, index) => (
@@ -113,9 +119,7 @@ const Product = ({
                   alt={product.title}
                 />
                 <div className="px-4">
-                  <h2 className="text-green-300 truncate">
-                    {product.title}
-                  </h2>
+                  <h2 className="text-green-300 truncate">{product.title}</h2>
                   <p className="my-3 text-gray-400 truncate">
                     {product.description}
                   </p>
