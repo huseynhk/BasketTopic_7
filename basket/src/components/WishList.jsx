@@ -13,6 +13,7 @@ const WishList = ({
   basket,
   getSortedProducts,
   sortOption,
+  setQuantity,
 }) => {
 
 
@@ -82,7 +83,7 @@ const WishList = ({
               />
               <div className="px-2">
                 <h2 className="text-green-300 truncate">
-                  Title: {product.title}
+                 {product.title}
                 </h2>
                 <p className="my-3 text-gray-400 truncate">
                   {product.description}

@@ -84,13 +84,13 @@ const Basket = ({
   return (
     <>
       <div className="h-screen">
-        <header className="bg-gray-700 py-5 text-gray-200 flex flex-col justify-center items-center">
-          <h3 className="text-3xl font-bold text-stone-300 mb-2">
+        <header className="bg-gray-700 py-3 text-gray-200 flex flex-col justify-center items-center">
+          <h3 className="text-2xl font-bold text-stone-300 mb-2">
             Total: $ {calculateTotalPrice()}
           </h3>
           <button
             onClick={() => setIsRemoveAllModalOpen(true)}
-            className="bg-red-700 rounded-xl py-2 px-5 hover:bg-red-800 transition-all duration-500 text-gray-100 text-3xl"
+            className="bg-red-700 rounded-md py-1 px-4 hover:bg-red-800 transition-all duration-500 text-gray-100 text-2xl"
           >
             Remove All
           </button>
@@ -107,7 +107,7 @@ const Basket = ({
                 />
                 <div className="px-2">
                   <h2 className="text-green-300 truncate">
-                    Title: {product.title}
+                    {product.title}
                   </h2>
                   <p className="my-3 text-gray-400 truncate">
                     {product.description}

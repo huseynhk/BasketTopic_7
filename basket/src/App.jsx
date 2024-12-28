@@ -126,6 +126,7 @@ function App() {
               sortOption={sortOption}
               getSortedProducts={getSortedProducts}
               setBasket={setBasket}
+              setQuantity={setQuantity}
             />
           }
         />

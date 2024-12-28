@@ -53,7 +53,7 @@ const Home = () => {
           <img
             src={img.src}
             alt={img.title}
-            className="w-full h-[80vh] object-cover mb-2"
+            className="w-full h-[83vh] object-cover mb-1"
           />
         </div>
       ))}

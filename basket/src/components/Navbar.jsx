@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTER } from "../constant/router";
 import { MdShoppingBasket } from "react-icons/md";
@@ -17,10 +17,13 @@ const Navbar = ({
   const handleResetSort = () => {
     setSortOption("");
   };
+  useEffect(() => {
+    setSearchQuery("");
+  }, [pathname]);
 
   return (
     <>
-      <div className="p-6 bg-gray-800 text-gray-300 flex justify-between items-center sticky top-0">
+      <div className="px-12 py-4 bg-gray-800 text-gray-300 flex justify-between items-center sticky top-0">
         <div>
           <select
             value={sortOption}
@@ -50,16 +53,16 @@ const Navbar = ({
           />
           <div className="flex items-center ml-8">
             <Link
-              className={`font-medium  text-[28px] ${
-                pathname === ROUTER.Home ? "text-red-300" : "text-gray-400"
+              className={`font-medium  text-[24px] ${
+                pathname === ROUTER.Home ? "text-cyan-300" : "text-gray-400"
               } cursor-pointer`}
               to={ROUTER.Home}
             >
               Home
             </Link>
             <Link
-              className={`font-medium ml-5 text-[28px] ${
-                pathname === ROUTER.Product ? "text-red-300" : "text-gray-400"
+              className={`font-medium ml-5 text-[24px] ${
+                pathname === ROUTER.Product ? "text-cyan-300" : "text-gray-400"
               } cursor-pointer`}
               to={ROUTER.Product}
             >
@@ -75,8 +78,8 @@ const Navbar = ({
             to={ROUTER.Basket}
           >
             <div className="flex items-center justify-center">
-              <MdShoppingBasket className=" text-5xl" />
-              <span className="bg-red-500 mb-5 text-white h-7 w-7 rounded-full px-2 py-1 flex items-center justify-center">
+              <MdShoppingBasket className=" text-4xl" />
+              <span className="bg-red-500 mb-5 ml-[2px] text-white h-6 w-6 rounded-full px-2 py-1 flex items-center justify-center">
                 <span className="text-xl ">{quantity}</span>
               </span>
             </div>
@@ -88,8 +91,8 @@ const Navbar = ({
             to={ROUTER.WishList}
           >
             <div className="flex items-center justify-center">
-              <FaHeart className=" text-5xl" />
-              <span className="bg-red-500 mb-5 text-white h-7 w-7 rounded-full px-2 py-1 flex items-center justify-center">
+              <FaHeart className=" text-[33px]" />
+              <span className="bg-red-500 mb-5  ml-[3px] text-white h-6 w-6 rounded-full px-2 py-1 flex items-center justify-center">
                 <span className="text-xl ">{wishList.length}</span>
               </span>
             </div>

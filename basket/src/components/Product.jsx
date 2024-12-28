@@ -98,8 +98,8 @@ const Product = ({
     <>
       <div>
         {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-24 w-24 border-t-8 border-violet-500 border-opacity-50"></div>
+          <div className="flex justify-center items-center h-72">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-8 mt-12 border-cyan-300 border-opacity-50"></div>
           </div>
         ) : sortedProducts.length === 0 ? (
           <h2 className="text-green-300 text-4xl font-bold m-12">Not Found</h2>
@@ -114,7 +114,7 @@ const Product = ({
                 />
                 <div className="px-2">
                   <h2 className="text-green-300 truncate">
-                    Title: {product.title}
+                    {product.title}
                   </h2>
                   <p className="my-3 text-gray-400 truncate">
                     {product.description}
@@ -150,7 +150,7 @@ const Product = ({
                     )}
                   </button>
                   <button
-                    className="bg-indigo-500 text-white p-3 rounded-lg hover:bg-blue-700 transition-all duration-500"
+                    className="bg-cyan-700 text-white p-3 rounded-lg hover:bg-cyan-900 transition-all duration-500"
                     onClick={() =>
                       navigate(`${ROUTER.ProductDetail}/${product.id}`)
                     }
