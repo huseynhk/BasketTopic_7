@@ -97,7 +97,7 @@ const Basket = ({
         </header>
 
         {sortedProducts.length > 0 ? (
-          <div className="py-5 px-10 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {sortedProducts.map((product, index) => (
               <div className="bg-gray-800 text-gray-200 rounded-xl" key={index}>
                 <img
@@ -105,7 +105,7 @@ const Basket = ({
                   src={product.images[0]}
                   alt={product.title}
                 />
-                <div className="px-2">
+                <div className="px-4">
                   <h2 className="text-green-300 truncate">
                     {product.title}
                   </h2>
@@ -119,22 +119,22 @@ const Basket = ({
 
                 <div className="flex items-center justify-between p-4">
                   <div>
-                    <p className="mb-3 text-cyan-300">${product.price}</p>
+                    <p className="mb-3 text-cyan-300">$ {product.price}</p>
                     <p className="text-indigo-300">Rating: {product.rating}</p>
                   </div>
-                  <span>$ {(product.price * product.count).toFixed(2)}</span>
+                  <span>Sum: $ {(product.price * product.count).toFixed(2)}</span>
                   <div className="flex items-center">
                     <div className="mr-3">
                       <button
                         onClick={() => deccrementQuantity(product.id)}
-                        className="bg-red-300 text-gray-900 text-2xl rounded-xl py-2 px-3 hover:bg-red-400 transition-all duration-500"
+                        className="bg-red-300 text-gray-900 text-2xl rounded-md  h-10 w-8  hover:bg-red-400 transition-all duration-500"
                       >
                         -
                       </button>
                       <span className="mx-2 text-3xl">{product.count}</span>
                       <button
                         onClick={() => incrementQuantity(product.id)}
-                        className="bg-green-300 text-gray-900 text-xl py-2 px-3 rounded-xl hover:bg-green-400 transition-all duration-500"
+                        className="bg-green-300 text-gray-900 text-2xl rounded-md  h-10 w-8 hover:bg-green-400 transition-all duration-500"
                       >
                         +
                       </button>
@@ -144,7 +144,7 @@ const Basket = ({
                         setSelectedProductId(product.id);
                         setIsModalOpen(true);
                       }}
-                      className="bg-gray-300 rounded-xl py-2 px-5 hover:bg-gray-400 transition-all duration-500"
+                      className="bg-gray-300 rounded-xl py-2 px-3 hover:bg-gray-400 transition-all duration-500"
                     >
                       <FiTrash2 className="text-3xl text-red-700" />
                     </button>
@@ -155,7 +155,7 @@ const Basket = ({
           </div>
         ) : (
           <div className="flex justify-center items-center">
-            <h1 className="text-cyan-300 text-[300px] mt-5">
+            <h1 className="text-cyan-300 text-[300px] mt-8">
               <LuShoppingBasket />
             </h1>
           </div>

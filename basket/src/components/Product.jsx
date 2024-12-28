@@ -104,7 +104,7 @@ const Product = ({
         ) : sortedProducts.length === 0 ? (
           <h2 className="text-green-300 text-4xl font-bold m-12">Not Found</h2>
         ) : (
-          <div className="py-5 px-10 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
             {sortedProducts.map((product, index) => (
               <div className="bg-gray-800 text-gray-200 rounded-xl" key={index}>
                 <img
@@ -112,7 +112,7 @@ const Product = ({
                   src={product.images[0]}
                   alt={product.title}
                 />
-                <div className="px-2">
+                <div className="px-4">
                   <h2 className="text-green-300 truncate">
                     {product.title}
                   </h2>
