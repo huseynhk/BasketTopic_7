@@ -10,9 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import { toast } from "react-toastify";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 
 
 function App() {
@@ -37,52 +35,7 @@ function App() {
     return sortedProducts;
   };
 
-  const addToBasket = (arr, productId) => {
-    const addProduct = arr.find((product) => product.id === productId);
-    const existProduct = basket.find((product) => product.id === productId);
-    if (addProduct) {
-      if (existProduct) {
-        toast.warning("Product is already exist!", {
-          autoClose: 1500,
-        });
-      } else {
-        const updatedBasket = [...basket, { ...addProduct, count: 1 }];
-        setBasket(updatedBasket);
-        setQuantity((prevCount) => prevCount + 1);
-        localStorage.setItem("basketArray", JSON.stringify(updatedBasket));
-        toast.success("Product added successfully!", {
-          autoClose: 1500,
-        });
-      }
-    } else {
-      toast.error("Product not found!", {
-        autoClose: 1500,
-      });
-    }
-  };
 
-  const addToWishlist = (productId) => {
-    const addProduct = products.find((product) => product.id === productId);
-    const existProduct = wishList.find((product) => product.id === productId);
-    if (addProduct) {
-      if (existProduct) {
-        toast.warning("Product is already in the wishlist!", {
-          autoClose: 1500,
-        });
-      } else {
-        const updatedWishList = [...wishList, addProduct];
-        setWishList(updatedWishList);
-        localStorage.setItem("wishListArray", JSON.stringify(updatedWishList));
-        toast.success("Product added to wishlist successfully!", {
-          autoClose: 1500,
-        });
-      }
-    } else {
-      toast.error("Product not found!", {
-        autoClose: 1500,
-      });
-    }
-  };
 
   const updateProductCount = () => {
     const total = basket.reduce((total, product) => total + product.count, 0);
@@ -90,14 +43,7 @@ function App() {
     setQuantity(roundedTotal);
   };
 
-  // useEffect(() => {
-  //   const savedBasketString = localStorage.getItem("basketArray");
-  //   if (savedBasketString) {
-  //     const savedBasket = JSON.parse(savedBasketString);
-  //     setBasket(savedBasket);
-  //     setQuantity(savedBasket.length);
-  //   }
-  // }, [setBasket]);
+
   useEffect(() => {
     const savedBasketString = localStorage.getItem("basketArray");
     const savedWishListString = localStorage.getItem("wishListArray");
@@ -139,13 +85,13 @@ function App() {
               setSearchQuery={setSearchQuery}
               basket={basket}
               setBasket={setBasket}
-              addToBasket={addToBasket}
               products={products}
               setProducts={setProducts}
-              addToWishlist={addToWishlist}
               wishList={wishList}
               getSortedProducts={getSortedProducts}
               sortOption={sortOption}
+              setWishList={setWishList}
+              setQuantity={setQuantity}
             />
           }
         />
@@ -163,7 +109,6 @@ function App() {
               setSearchQuery={setSearchQuery}
               basket={basket}
               setBasket={setBasket}
-              addToBasket={addToBasket}
               sortOption={sortOption}
               getSortedProducts={getSortedProducts}
             />
@@ -177,10 +122,10 @@ function App() {
               setSearchQuery={setSearchQuery}
               wishList={wishList}
               setWishList={setWishList}
-              addToBasket={addToBasket}
               basket={basket}
               sortOption={sortOption}
               getSortedProducts={getSortedProducts}
+              setBasket={setBasket}
             />
           }
         />

@@ -72,11 +72,12 @@ const Basket = ({
   );
 
   const sortedProducts = useMemo(() => getSortedProducts(filteredBasket), [filteredBasket, sortOption]);
-  useEffect(() => {
-    const savedBasket = JSON.parse(localStorage.getItem("basketArray") || []);
-    setBasket(savedBasket);
-    setQuantity(savedBasket.length);
-  }, []);
+  // useEffect(() => {
+  //   const savedBasket = JSON.parse(localStorage.getItem("basketArray") || []);
+  //   setBasket(savedBasket);
+  //   setQuantity(savedBasket.length);
+  // }, []);
+  
   return (
     <>
    

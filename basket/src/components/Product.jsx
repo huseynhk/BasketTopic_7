@@ -5,17 +5,19 @@ import { ROUTER } from "../constant/router";
 import { TbBasketCode } from "react-icons/tb";
 import { MdShoppingBasket } from "react-icons/md";
 import { GoHeartFill, GoHeart } from "react-icons/go";
+import { toast } from "react-toastify";
 
 const Product = ({
   basket,
   searchQuery,
-  addToBasket,
   products,
   setProducts,
   wishList,
-  addToWishlist,
   getSortedProducts,
-  sortOption
+  sortOption,
+  setWishList,
+  setBasket,
+  setQuantity,
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -29,6 +31,53 @@ const Product = ({
       console.error("Failed to fetch products", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+
+  const addToBasket = (productId) => {
+    const addProduct = products.find((product) => product.id === productId);
+    const existProduct = basket.find((product) => product.id === productId);
+    if (addProduct) {
+      if (existProduct) {
+        toast.warning("Product is already exist!", {
+          autoClose: 1500,
+        });
+      } else {
+        const updatedBasket = [...basket, { ...addProduct, count: 1 }];
+        setBasket(updatedBasket);
+        setQuantity((prevCount) => prevCount + 1);
+        localStorage.setItem("basketArray", JSON.stringify(updatedBasket));
+        toast.success("Product added successfully!", {
+          autoClose: 1500,
+        });
+      }
+    } else {
+      toast.error("Product not found!", {
+        autoClose: 1500,
+      });
+    }
+  };
+  const addToWishlist = (productId) => {
+    const addProduct = products.find((product) => product.id === productId);
+    const existProduct = wishList.find((product) => product.id === productId);
+    if (addProduct) {
+      if (existProduct) {
+        toast.warning("Product is already in the wishlist!", {
+          autoClose: 1500,
+        });
+      } else {
+        const updatedWishList = [...wishList, addProduct];
+        setWishList(updatedWishList);
+        localStorage.setItem("wishListArray", JSON.stringify(updatedWishList));
+        toast.success("Product added to wishlist successfully!", {
+          autoClose: 1500,
+        });
+      }
+    } else {
+      toast.error("Product not found!", {
+        autoClose: 1500,
+      });
     }
   };
   const isExist = (arr, productId) => {
@@ -81,7 +130,7 @@ const Product = ({
                     <p className="text-indigo-300">Rating: {product.rating}</p>
                   </div>
                   <button
-                    onClick={() => addToBasket(products,product.id)}
+                    onClick={() => addToBasket(product.id)}
                     className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700 transition-all duration-500"
                   >
                     {isExist(basket, product.id) ? (

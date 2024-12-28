@@ -7,13 +7,36 @@ import { toast } from "react-toastify";
 
 const WishList = ({
   searchQuery,
-  addToBasket,
+  setBasket,
   wishList,
   setWishList,
   basket,
   getSortedProducts,
   sortOption,
 }) => {
+  const addToBasket = (productId) => {
+    const addProduct = wishList.find((product) => product.id === productId);
+    const existProduct = basket.find((product) => product.id === productId);
+    if (addProduct) {
+      if (existProduct) {
+        toast.warning("Product is already exist!", {
+          autoClose: 1500,
+        });
+      } else {
+        const updatedBasket = [...basket, { ...addProduct, count: 1 }];
+        setBasket(updatedBasket);
+        setQuantity((prevCount) => prevCount + 1);
+        localStorage.setItem("basketArray", JSON.stringify(updatedBasket));
+        toast.success("Product added successfully!", {
+          autoClose: 1500,
+        });
+      }
+    } else {
+      toast.error("Product not found!", {
+        autoClose: 1500,
+      });
+    }
+  };
   const removeFromWishlist = (productId) => {
     const updatedWishList = wishList.filter(
       (product) => product.id !== productId
@@ -45,6 +68,7 @@ const WishList = ({
     () => getSortedProducts(filteredList),
     [filteredList, sortOption]
   );
+  
 
   return (
     <div className="h-screen">
@@ -85,7 +109,7 @@ const WishList = ({
                 <div className="flex items-center">
                   <div className="mr-3">
                     <button
-                      onClick={() => addToBasket(wishList, product.id)}
+                      onClick={() => addToBasket(product.id)}
                       className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700 transition-all duration-500"
                     >
                       {isExist(product.id) ? (
