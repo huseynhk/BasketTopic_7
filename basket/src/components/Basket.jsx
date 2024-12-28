@@ -1,8 +1,8 @@
-import React, { useEffect,useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { LuShoppingBasket } from "react-icons/lu";
 import { toast } from "react-toastify";
-
+import { Dialog } from "@headlessui/react";
 
 const Basket = ({
   basket,
@@ -10,8 +10,11 @@ const Basket = ({
   searchQuery,
   setQuantity,
   getSortedProducts,
-  sortOption
+  sortOption,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRemoveAllModalOpen, setIsRemoveAllModalOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const removeFromBasket = (productId) => {
     const deletedProduct = basket.filter((product) => product.id !== productId);
@@ -27,6 +30,10 @@ const Basket = ({
     setBasket([]);
     setQuantity(0);
     localStorage.setItem("basketArray", JSON.stringify([]));
+    setIsRemoveAllModalOpen(false);
+    toast.success("All products removed successfully!", {
+      autoClose: 1500,
+    });
   };
 
   const incrementQuantity = (productId) => {
@@ -61,33 +68,28 @@ const Basket = ({
       (total, product) => total + product.price * product.count,
       0
     );
-    const roundedTotal = total.toFixed(2); 
+    const roundedTotal = total.toFixed(2);
     return parseFloat(roundedTotal);
   };
-  
-
 
   const filteredBasket = basket?.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const sortedProducts = useMemo(() => getSortedProducts(filteredBasket), [filteredBasket, sortOption]);
-  // useEffect(() => {
-  //   const savedBasket = JSON.parse(localStorage.getItem("basketArray") || []);
-  //   setBasket(savedBasket);
-  //   setQuantity(savedBasket.length);
-  // }, []);
-  
+  const sortedProducts = useMemo(
+    () => getSortedProducts(filteredBasket),
+    [filteredBasket, sortOption]
+  );
+
   return (
     <>
-   
       <div className="h-screen">
         <header className="bg-gray-700 py-5 text-gray-200 flex flex-col justify-center items-center">
           <h3 className="text-3xl font-bold text-stone-300 mb-2">
             Total: $ {calculateTotalPrice()}
           </h3>
           <button
-            onClick={removeAllProducts}
+            onClick={() => setIsRemoveAllModalOpen(true)}
             className="bg-red-700 rounded-xl py-2 px-5 hover:bg-red-800 transition-all duration-500 text-gray-100 text-3xl"
           >
             Remove All
@@ -138,7 +140,10 @@ const Basket = ({
                       </button>
                     </div>
                     <button
-                      onClick={() => removeFromBasket(product.id)}
+                      onClick={() => {
+                        setSelectedProductId(product.id);
+                        setIsModalOpen(true);
+                      }}
                       className="bg-gray-300 rounded-xl py-2 px-5 hover:bg-gray-400 transition-all duration-500"
                     >
                       <FiTrash2 className="text-3xl text-red-700" />
@@ -156,6 +161,64 @@ const Basket = ({
           </div>
         )}
       </div>
+
+      {/* Modal for removing a single product */}
+      <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white rounded-lg p-5">
+            <h2 className="text-xl font-semibold">Remove Product</h2>
+            <p>
+              Are you sure you want to remove this product from your basket?
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => {
+                  removeFromBasket(selectedProductId);
+                  setIsModalOpen(false);
+                }}
+                className="bg-red-600 text-white px-4 py-2 rounded-md"
+              >
+                Remove
+              </button>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="ml-2 bg-gray-400 text-white px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* Modal for removing all products */}
+      <Dialog
+        open={isRemoveAllModalOpen}
+        onClose={() => setIsRemoveAllModalOpen(false)}
+      >
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white rounded-lg p-5">
+            <h2 className="text-xl font-semibold">Remove All Products</h2>
+            <p>
+              Are you sure you want to remove all products from your basket?
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={removeAllProducts}
+                className="bg-red-600 text-white px-4 py-2 rounded-md"
+              >
+                Remove All
+              </button>
+              <button
+                onClick={() => setIsRemoveAllModalOpen(false)}
+                className="ml-2 bg-gray-400 text-white px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };

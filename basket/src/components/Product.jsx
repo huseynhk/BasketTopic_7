@@ -99,7 +99,7 @@ const Product = ({
       <div>
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-24 w-24 border-t-8 border-green-500 border-opacity-50"></div>
+            <div className="animate-spin rounded-full h-24 w-24 border-t-8 border-violet-500 border-opacity-50"></div>
           </div>
         ) : sortedProducts.length === 0 ? (
           <h2 className="text-green-300 text-4xl font-bold m-12">Not Found</h2>

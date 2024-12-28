@@ -14,6 +14,8 @@ const WishList = ({
   getSortedProducts,
   sortOption,
 }) => {
+
+
   const addToBasket = (productId) => {
     const addProduct = wishList.find((product) => product.id === productId);
     const existProduct = basket.find((product) => product.id === productId);
@@ -47,10 +49,8 @@ const WishList = ({
       autoClose: 1500,
     });
   };
-  const removeAllProducts = () => {
-    setWishList([]);
-    localStorage.setItem("wishListArray", JSON.stringify([]));
-  };
+ 
+
   useEffect(() => {
     const savedItem = JSON.parse(localStorage.getItem("wishListArray") || []);
     setWishList(savedItem);
@@ -68,19 +68,9 @@ const WishList = ({
     () => getSortedProducts(filteredList),
     [filteredList, sortOption]
   );
-  
 
   return (
     <div className="h-screen">
-      <header className="bg-gray-700 py-5 text-gray-200 flex flex-col justify-center items-center">
-        <button
-          onClick={removeAllProducts}
-          className="bg-red-700 rounded-xl py-2 px-5 hover:bg-red-800 transition-all duration-500 text-gray-100 text-3xl"
-        >
-          Remove All
-        </button>
-      </header>
-
       {sortedProducts.length > 0 ? (
         <div className="py-5 px-10 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {sortedProducts.map((product, index) => (
