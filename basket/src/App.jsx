@@ -98,25 +98,25 @@ function App() {
   //     setQuantity(savedBasket.length);
   //   }
   // }, [setBasket]);
-  useEffect(() => {
-    const savedBasketString = localStorage.getItem("basketArray");
-    const savedWishListString = localStorage.getItem("wishListArray");
+  // useEffect(() => {
+  //   const savedBasketString = localStorage.getItem("basketArray");
+  //   const savedWishListString = localStorage.getItem("wishListArray");
 
-    if (savedBasketString) {
-      const savedBasket = JSON.parse(savedBasketString);
-      setBasket(savedBasket);
-      setQuantity(savedBasket.length);
-    }
-    if (savedWishListString) {
-      const savedWishList = JSON.parse(savedWishListString);
-      setWishList(savedWishList);
-    }
-  }, [setBasket, setWishList]);
+  //   if (savedBasketString) {
+  //     const savedBasket = JSON.parse(savedBasketString);
+  //     setBasket(savedBasket);
+  //     setQuantity(savedBasket.length);
+  //   }
+  //   if (savedWishListString) {
+  //     const savedWishList = JSON.parse(savedWishListString);
+  //     setWishList(savedWishList);
+  //   }
+  // }, [setBasket, setWishList]);
 
-  useEffect(() => {
-    updateProductCount();
-    localStorage.setItem("basketArray", JSON.stringify(basket));
-  }, [basket]);
+  // useEffect(() => {
+  //   updateProductCount();
+  //   localStorage.setItem("basketArray", JSON.stringify(basket));
+  // }, [basket]);
 
   return (
     <>
