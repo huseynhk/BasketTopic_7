@@ -53,7 +53,7 @@ const Home = () => {
       <div className="hidden md:block">
         <Slider {...settings}>
           {imgs.map((img) => (
-            <div key={img.id} className=" z-10">
+            <div key={img.id} className="z-10">
               <img
                 src={img.src}
                 alt={img.title}
@@ -64,7 +64,7 @@ const Home = () => {
         </Slider>
       </div>
       <div className="block md:hidden">
-        <div className=" z-10">
+        <div className="z-10">
           <img
             src={Img_1}
             alt="image"
