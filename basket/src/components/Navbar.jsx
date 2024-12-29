@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTER } from "../constant/router";
 import { MdShoppingBasket } from "react-icons/md";
 import { FaHeart } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = ({
   quantity,
@@ -13,18 +14,20 @@ const Navbar = ({
   setSortOption,
 }) => {
   const { pathname } = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleResetSort = () => {
     setSortOption("");
   };
   useEffect(() => {
     setSearchQuery("");
+    setIsMenuOpen(false)
   }, [pathname]);
 
   return (
     <>
       <div className="px-12 py-4 bg-gray-800 text-gray-300 flex justify-between items-center sticky top-0">
-        <div>
+        <div className="hidden md:flex items-center  ">
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
@@ -43,17 +46,29 @@ const Navbar = ({
             Reset
           </button>
         </div>
-        <div className="flex items-center">
+
+        {/* Hamburger Menu */}
+        <div className="sm:hidden">
+          <GiHamburgerMenu
+            className="text-3xl cursor-pointer"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          />
+        </div>
+        <div
+          className={`${
+            isMenuOpen ? "flex" : "hidden"
+          } sm:flex flex-col sm:flex-row  items-center  bg-gray-700 sm:bg-transparent absolute sm:relative top-full left-0 w-full sm:w-auto z-50`}
+        >
           <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="px-3 py-1 rounded-lg text-gray-800 outline outline-2 w-[300px]"
+            className="px-3 py-1 mt-3 md:mt-0 rounded-lg text-gray-800 outline outline-2 w-[200px] md:w-[300px]"
           />
-          <div className="flex items-center ml-8">
+          <div className="flex flex-col  md:flex-row items-center ml-0 md:ml-8 py-4 md:py-0">
             <Link
-              className={`font-medium  text-[24px] ${
+              className={`font-medium  text-[24px]  ${
                 pathname === ROUTER.Home ? "text-cyan-300" : "text-gray-400"
               } cursor-pointer`}
               to={ROUTER.Home}
@@ -61,7 +76,7 @@ const Navbar = ({
               Home
             </Link>
             <Link
-              className={`font-medium ml-5 text-[24px] ${
+              className={`font-medium ml-0 md:ml-5 text-[24px] ${
                 pathname === ROUTER.Product ? "text-cyan-300" : "text-gray-400"
               } cursor-pointer`}
               to={ROUTER.Product}

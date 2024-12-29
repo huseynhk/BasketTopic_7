@@ -14,7 +14,6 @@ const imgs = [
   { id: 4, src: Img_4, title: "Image 4" },
   { id: 2, src: Img_2, title: "Image 2" },
   { id: 3, src: Img_3, title: "Image 3" },
-
 ];
 
 const CustomArrow = ({ className, style, onClick, direction }) => {
@@ -50,17 +49,30 @@ const Home = () => {
   };
 
   return (
-    <Slider {...settings}>
-      {imgs.map((img) => (
-        <div key={img.id}>
+    <>
+      <div className="hidden md:block">
+        <Slider {...settings}>
+          {imgs.map((img) => (
+            <div key={img.id} className=" z-10">
+              <img
+                src={img.src}
+                alt={img.title}
+                className="w-full h-[85vh] md:h-[83.5vh] object-cover mb-1 "
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+      <div className="block md:hidden">
+        <div className=" z-10">
           <img
-            src={img.src}
-            alt={img.title}
-            className="w-full h-[83.5vh] object-cover mb-1"
+            src={Img_1}
+            alt="image"
+            className="w-full h-[92vh] object-cover"
           />
         </div>
-      ))}
-    </Slider>
+      </div>
+    </>
   );
 };
 

@@ -101,7 +101,7 @@ const Product = ({
       <div>
         {loading ? (
           <div className="flex justify-center items-center h-72">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-8 mt-12 border-cyan-300 border-opacity-50"></div>
+            <div className="animate-spin rounded-full h-32 w-32 border-t-8 mt-60 md:mt-12 border-cyan-300 border-opacity-50"></div>
           </div>
         ) : sortedProducts.length === 0 ? (
           <div className="flex justify-center items-center h-72">
@@ -135,12 +135,12 @@ const Product = ({
                   </div>
                   <button
                     onClick={() => addToBasket(product.id)}
-                    className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-700 transition-all duration-500"
+                    className="bg-blue-500 text-white p-2 md:p-3 rounded-lg hover:bg-blue-700 transition-all duration-500"
                   >
                     {isExist(basket, product.id) ? (
-                      <TbBasketCode className="text-2xl" />
+                      <TbBasketCode className="text-lg md:text-2xl" />
                     ) : (
-                      <MdShoppingBasket className="text-2xl" />
+                      <MdShoppingBasket className="text-lg md:text-2xl" />
                     )}
                   </button>
                   <button
@@ -148,18 +148,18 @@ const Product = ({
                     className=" p-3  transition-all duration-500"
                   >
                     {isExist(wishList, product.id) ? (
-                      <GoHeartFill className="text-5xl text-red-500" />
+                      <GoHeartFill className="text-3xl md:text-5xl text-red-500" />
                     ) : (
-                      <GoHeart className="text-5xl text-red-500" />
+                      <GoHeart className="text-3xl md:text-5xl text-red-500" />
                     )}
                   </button>
                   <button
-                    className="bg-cyan-700 text-white p-3 rounded-lg hover:bg-cyan-900 transition-all duration-500"
+                    className="bg-cyan-700 text-white px-1 py-2 md:p-3 rounded-lg hover:bg-cyan-900 transition-all duration-500"
                     onClick={() =>
                       navigate(`${ROUTER.ProductDetail}/${product.id}`)
                     }
                   >
-                    Go Details Page
+                    Go Details
                   </button>
                 </div>
               </div>
