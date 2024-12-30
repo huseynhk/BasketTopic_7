@@ -97,7 +97,7 @@ const Basket = ({
         </header>
 
         {sortedProducts.length > 0 ? (
-          <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="py-5 px-5 md:px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {sortedProducts.map((product, index) => (
               <div className="bg-gray-800 text-gray-200 rounded-xl" key={index}>
                 <img
@@ -127,14 +127,14 @@ const Basket = ({
                     <div className="mr-3">
                       <button
                         onClick={() => deccrementQuantity(product.id)}
-                        className="bg-red-300 text-gray-900 text-2xl rounded-md  h-10 w-8  hover:bg-red-400 transition-all duration-500"
+                        className="bg-red-300 text-gray-900 text-2xl rounded-md h-8 w-5  md:h-10 md:w-8  hover:bg-red-400 transition-all duration-500"
                       >
                         -
                       </button>
                       <span className="mx-2 text-3xl">{product.count}</span>
                       <button
                         onClick={() => incrementQuantity(product.id)}
-                        className="bg-green-300 text-gray-900 text-2xl rounded-md  h-10 w-8 hover:bg-green-400 transition-all duration-500"
+                        className="bg-green-300 text-gray-900 text-2xl rounded-md  h-8 w-5  md:h-10 md:w-8 hover:bg-green-400 transition-all duration-500"
                       >
                         +
                       </button>
@@ -144,9 +144,9 @@ const Basket = ({
                         setSelectedProductId(product.id);
                         setIsModalOpen(true);
                       }}
-                      className="bg-gray-300 rounded-xl py-2 px-3 hover:bg-gray-400 transition-all duration-500"
+                      className="bg-gray-300 rounded-lg p-1 md:py-2 md:px-3  hover:bg-gray-400 transition-all duration-500"
                     >
-                      <FiTrash2 className="text-3xl text-red-700" />
+                      <FiTrash2 className="text-2xl md:text-3xl text-red-700" />
                     </button>
                   </div>
                 </div>

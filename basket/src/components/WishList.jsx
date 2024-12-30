@@ -73,7 +73,7 @@ const WishList = ({
   return (
     <div className="h-screen">
       {sortedProducts.length > 0 ? (
-        <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="py-5  px-5 md:px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {sortedProducts.map((product, index) => (
             <div className="bg-gray-800 text-gray-200 rounded-xl" key={index}>
               <img
@@ -112,7 +112,7 @@ const WishList = ({
                   </div>
                   <button
                     onClick={() => removeFromWishlist(product.id)}
-                    className="bg-gray-300 rounded-xl py-2 px-5 hover:bg-gray-400 transition-all duration-500"
+                    className="bg-gray-300 rounded-lg py-2 px-2 md:px-3 hover:bg-gray-400 transition-all duration-500"
                   >
                     <FiTrash2 className="text-3xl text-red-700" />
                   </button>

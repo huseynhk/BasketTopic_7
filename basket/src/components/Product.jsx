@@ -110,7 +110,7 @@ const Product = ({
             </h2>
           </div>
         ) : (
-          <div className="py-5 px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+          <div className="py-5  px-5 md:px-12 grid gap-x-16 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
             {sortedProducts.map((product, index) => (
               <div className="bg-gray-800 text-gray-200 rounded-xl" key={index}>
                 <img
@@ -148,9 +148,9 @@ const Product = ({
                     className=" p-3  transition-all duration-500"
                   >
                     {isExist(wishList, product.id) ? (
-                      <GoHeartFill className="text-3xl md:text-5xl text-red-500" />
+                      <GoHeartFill className="text-4xl md:text-5xl text-red-500" />
                     ) : (
-                      <GoHeart className="text-3xl md:text-5xl text-red-500" />
+                      <GoHeart className="text-4xl md:text-5xl text-red-500" />
                     )}
                   </button>
                   <button
